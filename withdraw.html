@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pul chiqarish</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Pul chiqarish</h1>
+    <form id="withdrawForm">
+        <label for="withdrawAmount">Yechib olish summasi:</label>
+        <input type="number" id="withdrawAmount" required>
+        <label for="accountNumber">Hisob raqami:</label>
+        <input type="text" id="accountNumber" placeholder="Hisob raqamingiz" required>
+        <button type="submit">Yechib olish</button>
+    </form>
+    <p id="withdrawMessage"></p>
+
+    <script>
+        document.getElementById('withdrawForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const amount = document.getElementById('withdrawAmount').value;
+            const account = document.getElementById('accountNumber').value;
+
+            // Yechib olish muvaffaqiyatli xabarini ko'rsatish
+            document.getElementById('withdrawMessage').innerText = 
+                `Yechib olish so'rovi qabul qilindi. ${amount} UZS sizning hisobingizga yuboriladi: ${account}`;
+        });
+    </script>
+</body>
+</html>

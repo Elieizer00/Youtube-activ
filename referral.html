@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maxsus Havolalar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Maxsus Havolalar</h1>
+    <p>Sizning maxsus havolangiz: <span id="referralLink"></span></p>
+    <button onclick="generateReferralLink()">Havolani olish</button>
+
+    <script>
+        function generateReferralLink() {
+            const userId = Math.random().toString(36).substring(2, 15); // Tasodifiy foydalanuvchi ID
+            const referralBaseUrl = "https://yourwebsite.com/signup?ref="; // O'z sayt manzilingizni qo'shing
+            const referralLink = referralBaseUrl + userId;
+            document.getElementById('referralLink').innerText = referralLink;
+        }
+    </script>
+</body>
+</html>

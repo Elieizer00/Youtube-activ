@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vazifalar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Vazifalar</h1>
+    <p>Bu sahifada vazifalarni bajarish mumkin.</p>
+    <button onclick="getRandomYouTubeLink()">Tasodifiy YouTube Havolasi</button>
+    <p id="youtubeLink"></p>
+
+    <script>
+        function getRandomYouTubeLink() {
+            const links = [
+                'https://www.youtube.com/watch?v=example1',
+                'https://www.youtube.com/watch?v=example2',
+                'https://www.youtube.com/watch?v=example3',
+                // Qo'shimcha havolalarni qo'shish mumkin
+            ];
+            const randomLink = links[Math.floor(Math.random() * links.length)];
+            document.getElementById('youtubeLink').innerText = randomLink;
+        }
+    </script>
+</body>
+</html>
