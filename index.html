@@ -1,27 +1,66 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YOUTUBE active</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Login Page</title>
 </head>
 <body>
-    <h1>YOUTUBE active'ga xush kelibsiz!</h1>
-    <div id="login-section">
-        <h2>Tizimga kirish yoki ro'yxatdan o'tish</h2>
-        <input type="text" id="login" placeholder="Login (+998 bilan boshlanishi kerak)">
-        <input type="password" id="password" placeholder="Parol">
-        <button id="login-btn">Tizimga kirish</button>
-        <button id="register-btn">Ro'yxatdan o'tish</button>
-    </div>
-    <div id="user-section" style="display: none;">
-        <h2>Foydalanuvchi Kabineti</h2>
-        <p>Salom, <span id="user-login"></span>!</p> <!-- Foydalanuvchi logini shu yerda ko'rsatiladi -->
-        <p>Hisobingizni boshqarish uchun tugmalardan foydalaning.</p>
-        <button id="logout-btn">Chiqish</button>
+    <h2>Saytga kirish</h2>
+    <form id="loginForm">
+        <label for="login">Login:</label>
+        <input type="text" id="login" placeholder="+998..." required>
+        <button type="submit">Saytga kirish</button>
+    </form>
+
+    <div id="userDashboard" style="display: none;">
+        <h3>Xush kelibsiz, <span id="userLogin"></span></h3>
+        <p>Bu sizning shaxsiy kabinetingiz.</p>
+        <button onclick="logout()">Chiqish</button>
+        <!-- Depozit kiritish va boshqa funksiyalar bu qismda bo'ladi -->
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Loginni tekshirish va saqlash
+        const loginForm = document.getElementById('loginForm');
+        const userDashboard = document.getElementById('userDashboard');
+        const userLoginSpan = document.getElementById('userLogin');
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const login = document.getElementById('login').value;
+
+            // Faqat +998 bilan boshlanadigan loginni qabul qilamiz
+            if (!login.startsWith('+998') || login.length < 13) {
+                alert('Login +998 bilan boshlanadigan telefon raqami bo\'lishi kerak!');
+                return;
+            }
+
+            // Loginni saqlash va dashboardga o'tish
+            localStorage.setItem('userLogin', login);
+            showDashboard();
+        });
+
+        function showDashboard() {
+            const storedLogin = localStorage.getItem('userLogin');
+            if (storedLogin) {
+                userLoginSpan.textContent = storedLogin;
+                loginForm.style.display = 'none';
+                userDashboard.style.display = 'block';
+            }
+        }
+
+        // Logout funksiyasi
+        function logout() {
+            localStorage.removeItem('userLogin');
+            loginForm.style.display = 'block';
+            userDashboard.style.display = 'none';
+        }
+
+        // Sahifa yuklanishi bilan foydalanuvchi loginini tekshirish
+        window.onload = function() {
+            showDashboard();
+        };
+    </script>
 </body>
 </html>
