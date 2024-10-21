@@ -1,15 +1,43 @@
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+const authForm = document.getElementById('auth-form');
+const authButton = document.getElementById('auth-button');
+const registerButton = document.getElementById('register-button');
+const userSection = document.getElementById('user-section');
+const userNameSpan = document.getElementById('user-name');
 
-    const username = document.getElementById('username').value;
+authButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    const login = document.getElementById('login').value;
     const password = document.getElementById('password').value;
 
-    // Bu yerda foydalanuvchilarni haqiqiy login ma'lumotlari bilan tekshirish
-    if (username === '+998123456789' && password === 'password') {
-        // Kirish muvaffaqiyatli bo'lsa, foydalanuvchini asosiy sahifaga yo'naltirish
-        window.location.href = 'dashboard.html'; // Asosiy sahifa
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const user = users.find(u => u.login === login && u.password === password);
+
+    if (user) {
+        userSection.style.display = 'block';
+        document.getElementById('auth-section').style.display = 'none';
+        userNameSpan.textContent = login;
     } else {
-        // Xato login yoki parol
-        document.getElementById('errorMessage').innerText = 'Xato login yoki parol. Iltimos qaytadan urinib ko\'ring.';
+        alert('Login yoki parol noto\'g\'ri. Iltimos, qaytadan urinib ko\'ring.');
+    }
+});
+
+registerButton.addEventListener('click', function() {
+    const login = document.getElementById('login').value;
+    const password = document.getElementById('password').value;
+
+    if (!login.startsWith('+998')) {
+        alert('Login +998 bilan boshlanishi kerak!');
+        return;
+    }
+
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const userExists = users.find(u => u.login === login);
+
+    if (userExists) {
+        alert('Bunday login allaqachon mavjud. Iltimos, boshqa login tanlang.');
+    } else {
+        users.push({ login, password });
+        localStorage.setItem('users', JSON.stringify(users));
+        alert('Ro\'yxatdan o\'tish muvaffaqiyatli! Endi tizimga kiring.');
     }
 });

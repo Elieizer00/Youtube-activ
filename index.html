@@ -3,20 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YOUTUBE active - Kirish</title>
+    <title>YOUTUBE active</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>YOUTUBE active - Kirish</h1>
-    <form id="loginForm">
-        <label for="username">Login:</label>
-        <input type="text" id="username" placeholder="+998" required>
-        <label for="password">Parol:</label>
-        <input type="password" id="password" required>
-        <button type="submit">Kirish</button>
-    </form>
-    <p id="errorMessage" style="color:red;"></p>
-
+    <h1>YOUTUBE active'ga xush kelibsiz!</h1>
+    <div id="auth-section">
+        <h2>Tizimga kirish yoki ro'yxatdan o'tish</h2>
+        <form id="auth-form">
+            <input type="text" id="login" placeholder="Login (+998 bilan boshlanishi kerak)" required>
+            <input type="password" id="password" placeholder="Parol" required>
+            <button type="submit" id="auth-button">Tizimga kirish</button>
+            <button type="button" id="register-button">Ro'yxatdan o'tish</button>
+        </form>
+    </div>
+    <div id="user-section" style="display:none;">
+        <h2>Salom, <span id="user-name"></span>!</h2>
+        <p>Saytimiz orqali moliyaviy operatsiyalarni amalga oshiring.</p>
+        <h2>To'lov uchun:</h2>
+        <p>Karta raqami: 9860 2466 0286 8639</p>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
