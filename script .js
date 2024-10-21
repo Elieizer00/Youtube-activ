@@ -1,35 +1,73 @@
-// Foydalanuvchilar ma'lumotlari
-let users = [];
+const loginBtn = document.getElementById("login-btn");
+const registerBtn = document.getElementById("register-btn");
+const logoutBtn = document.getElementById("logout-btn");
+const userSection = document.getElementById("user-section");
+const loginSection = document.getElementById("login-section");
+const userLoginDisplay = document.getElementById("user-login");
 
-// Ro'yxatdan o'tish funksiyasi
-function register() {
-    const login = document.getElementById('reg-login').value;
-    const password = document.getElementById('reg-password').value;
+const users = JSON.parse(localStorage.getItem("users")) || [];
+let currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
 
-    if (login && password) {
-        // Foydalanuvchini qo'shish
-        users.push({ login, password });
-        alert("Ro'yxatdan o'tdingiz!");
-        document.getElementById('reg-login').value = '';
-        document.getElementById('reg-password').value = '';
-    } else {
-        alert("Iltimos, login va parolni to'ldiring!");
-    }
+// Foydalanuvchi avtomatik ravishda tizimga kirganini ko'rsatish
+if (currentUser) {
+    loginUser(currentUser);
 }
 
-// Tizimga kirish funksiyasi
-function login() {
-    const login = document.getElementById('login').value;
-    const password = document.getElementById('password').value;
+// Login tekshirish funktsiyasi
+function isValidLogin(login) {
+    return login.startsWith("+998") && login.length === 13;
+}
 
-    // Foydalanuvchini tekshirish
+function loginUser(user) {
+    alert("Tizimga kirish muvaffaqiyatli!");
+    userSection.style.display = "block";
+    loginSection.style.display = "none";
+    userLoginDisplay.textContent = user.login;
+    localStorage.setItem("currentUser", JSON.stringify(user));
+}
+
+loginBtn.addEventListener("click", function() {
+    const login = document.getElementById("login").value;
+    const password = document.getElementById("password").value;
+
+    // Login tekshiruvi
+    if (!isValidLogin(login)) {
+        alert("Login +998 bilan boshlanishi kerak va 13 ta belgidan iborat bo'lishi zarur!");
+        return;
+    }
+
     const user = users.find(u => u.login === login && u.password === password);
 
     if (user) {
-        alert("Tizimga muvaffaqiyatli kirildi!");
-        // Saytga kirgandan so'ng kerakli sahifaga yo'naltirish
-        window.location.href = "dashboard.html"; // Bu sahifani o'zingiz belgilashingiz mumkin
+        loginUser(user);
     } else {
         alert("Login yoki parol xato!");
     }
-}
+});
+
+registerBtn.addEventListener("click", function() {
+    const login = document.getElementById("login").value;
+    const password = document.getElementById("password").value;
+
+    // Login tekshiruvi
+    if (!isValidLogin(login)) {
+        alert("Login +998 bilan boshlanishi kerak va 13 ta belgidan iborat bo'lishi zarur!");
+        return;
+    }
+
+    if (users.some(u => u.login === login)) {
+        alert("Bu login allaqachon mavjud!");
+    } else {
+        const newUser = { login, password };
+        users.push(newUser);
+        localStorage.setItem("users", JSON.stringify(users));
+        alert("Ro'yxatdan o'tish muvaffaqiyatli!");
+        loginUser(newUser);
+    }
+});
+
+logoutBtn.addEventListener("click", function() {
+    userSection.style.display = "none";
+    loginSection.style.display = "block";
+    localStorage.removeItem("currentUser");
+});
