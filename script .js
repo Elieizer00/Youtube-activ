@@ -1,43 +1,35 @@
-const authForm = document.getElementById('auth-form');
-const authButton = document.getElementById('auth-button');
-const registerButton = document.getElementById('register-button');
-const userSection = document.getElementById('user-section');
-const userNameSpan = document.getElementById('user-name');
+// Foydalanuvchilar ma'lumotlari
+let users = [];
 
-authButton.addEventListener('click', function(event) {
-    event.preventDefault();
+// Ro'yxatdan o'tish funksiyasi
+function register() {
+    const login = document.getElementById('reg-login').value;
+    const password = document.getElementById('reg-password').value;
+
+    if (login && password) {
+        // Foydalanuvchini qo'shish
+        users.push({ login, password });
+        alert("Ro'yxatdan o'tdingiz!");
+        document.getElementById('reg-login').value = '';
+        document.getElementById('reg-password').value = '';
+    } else {
+        alert("Iltimos, login va parolni to'ldiring!");
+    }
+}
+
+// Tizimga kirish funksiyasi
+function login() {
     const login = document.getElementById('login').value;
     const password = document.getElementById('password').value;
 
-    const users = JSON.parse(localStorage.getItem('users')) || [];
+    // Foydalanuvchini tekshirish
     const user = users.find(u => u.login === login && u.password === password);
 
     if (user) {
-        userSection.style.display = 'block';
-        document.getElementById('auth-section').style.display = 'none';
-        userNameSpan.textContent = login;
+        alert("Tizimga muvaffaqiyatli kirildi!");
+        // Saytga kirgandan so'ng kerakli sahifaga yo'naltirish
+        window.location.href = "dashboard.html"; // Bu sahifani o'zingiz belgilashingiz mumkin
     } else {
-        alert('Login yoki parol noto\'g\'ri. Iltimos, qaytadan urinib ko\'ring.');
+        alert("Login yoki parol xato!");
     }
-});
-
-registerButton.addEventListener('click', function() {
-    const login = document.getElementById('login').value;
-    const password = document.getElementById('password').value;
-
-    if (!login.startsWith('+998')) {
-        alert('Login +998 bilan boshlanishi kerak!');
-        return;
-    }
-
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const userExists = users.find(u => u.login === login);
-
-    if (userExists) {
-        alert('Bunday login allaqachon mavjud. Iltimos, boshqa login tanlang.');
-    } else {
-        users.push({ login, password });
-        localStorage.setItem('users', JSON.stringify(users));
-        alert('Ro\'yxatdan o\'tish muvaffaqiyatli! Endi tizimga kiring.');
-    }
-});
+}

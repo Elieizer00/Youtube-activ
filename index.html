@@ -8,21 +8,19 @@
 </head>
 <body>
     <h1>YOUTUBE active'ga xush kelibsiz!</h1>
-    <div id="auth-section">
-        <h2>Tizimga kirish yoki ro'yxatdan o'tish</h2>
-        <form id="auth-form">
-            <input type="text" id="login" placeholder="Login (+998 bilan boshlanishi kerak)" required>
-            <input type="password" id="password" placeholder="Parol" required>
-            <button type="submit" id="auth-button">Tizimga kirish</button>
-            <button type="button" id="register-button">Ro'yxatdan o'tish</button>
-        </form>
-    </div>
-    <div id="user-section" style="display:none;">
-        <h2>Salom, <span id="user-name"></span>!</h2>
-        <p>Saytimiz orqali moliyaviy operatsiyalarni amalga oshiring.</p>
-        <h2>To'lov uchun:</h2>
-        <p>Karta raqami: 9860 2466 0286 8639</p>
-    </div>
+    <p>Saytimiz orqali moliyaviy operatsiyalarni amalga oshiring.</p>
+    <p>Karta raqami: 9860 2466 0286 8639</p>
+    
+    <h2>Ro'yxatdan o'tish</h2>
+    <input type="text" id="reg-login" placeholder="+998 bilan boshlanadigan login" />
+    <input type="password" id="reg-password" placeholder="Parol" />
+    <button onclick="register()">Ro'yxatdan o'tish</button>
+
+    <h2>Tizimga kirish</h2>
+    <input type="text" id="login" placeholder="Login" />
+    <input type="password" id="password" placeholder="Parol" />
+    <button onclick="login()">Tizimga kirish</button>
+
     <script src="script.js"></script>
 </body>
 </html>
