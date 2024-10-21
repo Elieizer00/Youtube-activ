@@ -1,32 +1,31 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pul chiqarish</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Pul Olish</title>
 </head>
 <body>
-    <h1>Pul chiqarish</h1>
+    <h2>Pul Olish</h2>
     <form id="withdrawForm">
-        <label for="withdrawAmount">Yechib olish summasi:</label>
-        <input type="number" id="withdrawAmount" required>
+        <label for="withdrawAmount">Yechib olish miqdori (so'mda):</label>
+        <input type="number" id="withdrawAmount" placeholder="10000" required>
         <label for="accountNumber">Hisob raqami:</label>
-        <input type="text" id="accountNumber" placeholder="Hisob raqamingiz" required>
-        <button type="submit">Yechib olish</button>
+        <input type="text" id="accountNumber" placeholder="9860 2466 0286 8639" required>
+        <button type="submit">Yuborish</button>
     </form>
+
     <p id="withdrawMessage"></p>
+    <a href="index.html">Bosh sahifaga qaytish</a>
 
     <script>
-        document.getElementById('withdrawForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const amount = document.getElementById('withdrawAmount').value;
-            const account = document.getElementById('accountNumber').value;
+        const withdrawForm = document.getElementById('withdrawForm');
+        const withdrawMessage = document.getElementById('withdrawMessage');
 
-            // Yechib olish muvaffaqiyatli xabarini ko'rsatish
-            document.getElementById('withdrawMessage').innerText = 
-                `Yechib olish so'rovi qabul qilindi. ${amount} UZS sizning hisobingizga yuboriladi: ${account}`;
-        });
-    </script>
-</body>
-</html>
+        withdrawForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const withdrawAmount = document.getElementById('withdrawAmount').value;
+            const accountNumber = document.getElementById('accountNumber').value;
+
+            // Bu yerda yechib olish jarayoni
+            withdrawMessage.textContent = `Siz ${withdrawAmount} UZS ye

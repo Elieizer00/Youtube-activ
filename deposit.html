@@ -1,29 +1,37 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Depozit qilish</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Depozit Kiritish</title>
 </head>
 <body>
-    <h1>Depozit qilish</h1>
+    <h2>Depozit Kiritish</h2>
+    <p>Hisob raqamingiz: <strong>9860 2466 0286 8639</strong></p>
     <form id="depositForm">
-        <label for="depositAmount">Depozit miqdori:</label>
-        <input type="number" id="depositAmount" required>
-        <p>Karta raqami: 9860 2466 0286 8639</p>
-        <button type="submit">Depozit qilish</button>
+        <label for="amount">Depozit miqdori (so'mda):</label>
+        <input type="number" id="amount" placeholder="100000" required>
+        <button type="submit">Tasdiqlash</button>
     </form>
+
     <p id="depositMessage"></p>
+    <a href="index.html">Bosh sahifaga qaytish</a>
 
     <script>
-        document.getElementById('depositForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const amount = document.getElementById('depositAmount').value;
+        const depositForm = document.getElementById('depositForm');
+        const depositMessage = document.getElementById('depositMessage');
 
-            // Depozit qilish muvaffaqiyatli xabarini ko'rsatish
-            document.getElementById('depositMessage').innerText = 
-                `Depozit so'rovi qabul qilindi. ${amount} UZS sizning hisobingizga kiritiladi.`;
+        depositForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const depositAmount = document.getElementById('amount').value;
+
+            // Bu yerda depozit kiritish jarayoni
+            if (confirm(`Siz ${depositAmount} UZS depozit kiritishni tasdiqlaysizmi?`)) {
+                depositMessage.textContent = `Siz ${depositAmount} UZS depozit kiritdingiz! Hisob raqamingizga o'tkaziladi.`;
+                // Hisobga pul o'tkazish logikasini qo'shishingiz mumkin
+            } else {
+                depositMessage.textContent = `Depozit kiritish bekor qilindi.`;
+            }
         });
     </script>
 </body>

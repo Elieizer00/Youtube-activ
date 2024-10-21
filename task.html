@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vazifa Bajarish</title>
+</head>
+<body>
+    <h2>Vazifa Bajarish</h2>
+    <button id="taskButton">Tasodifiy YouTube havolasini olish</button>
+    <p id="taskMessage"></p>
+
+    <a href="index.html">Bosh sahifaga qaytish</a>
+
+    <script>
+        const taskButton = document.getElementById('taskButton');
+        const taskMessage = document.getElementById('taskMessage');
+
+        taskButton.addEventListener('click', function() {
+            // Tasodifiy havola olish
+            const randomLink = 'https://www.youtube.com/watch?v=' + Math.random().toString(36).substring(2, 15);
+            taskMessage.textContent = `Sizga quyidagi havolani bajarish kerak: ${randomLink}`;
+            // Vazifa bajarilganidan so'ng foyda qo'shish logikasini qo'shishingiz mumkin
+        });
+    </script>
+</body>
+</html>
