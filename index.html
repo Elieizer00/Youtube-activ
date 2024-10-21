@@ -3,64 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Bosh Sahifa</title>
 </head>
 <body>
-    <h2>Saytga kirish</h2>
-    <form id="loginForm">
-        <label for="login">Login:</label>
-        <input type="text" id="login" placeholder="+998..." required>
-        <button type="submit">Saytga kirish</button>
-    </form>
+    <h1>Youtube Active</h1>
+    <h2>Foydalanuvchi kabineti</h2>
+    <p id="userLogin">Sizning loginingiz: <strong id="loginDisplay"></strong></p>
+    
+    <h3>Depozit Jadvali</h3>
+    <table border="1">
+        <tr>
+            <th>Depozit Miqdori (UZS)</th>
+            <th>Daraaja</th>
+            <th>Vazifalar soni</th>
+            <th>Kunlik Foyda (UZS)</th>
+            <th>Yillik Foyda (UZS)</th>
+        </tr>
+        <tr>
+            <td>100,000</td>
+            <td>Daraaja 1</td>
+            <td>5</td>
+            <td>2,000</td>
+            <td>730,000</td>
+        </tr>
+        <tr>
+            <td>500,000</td>
+            <td>Daraaja 2</td>
+            <td>10</td>
+            <td>10,000</td>
+            <td>3,650,000</td>
+        </tr>
+        <tr>
+            <td>1,000,000</td>
+            <td>Daraaja 3</td>
+            <td>15</td>
+            <td>25,000</td>
+            <td>9,125,000</td>
+        </tr>
+        <tr>
+            <td>2,000,000</td>
+            <td>Daraaja 4</td>
+            <td>20</td>
+            <td>50,000</td>
+            <td>18,250,000</td>
+        </tr>
+        <tr>
+            <td>3,000,000</td>
+            <td>Daraaja 5</td>
+            <td>25</td>
+            <td>100,000</td>
+            <td>36,500,000</td>
+        </tr>
+    </table>
 
-    <div id="userDashboard" style="display: none;">
-        <h3>Xush kelibsiz, <span id="userLogin"></span></h3>
-        <p>Bu sizning shaxsiy kabinetingiz.</p>
-        <button onclick="logout()">Chiqish</button>
-        <!-- Depozit kiritish va boshqa funksiyalar bu qismda bo'ladi -->
-    </div>
+    <h3>Sayt Qoidalari</h3>
+    <p>1. Depozit kiritganingizda, siz malum darajaga ulanasiz.</p>
+    <p>2. Har bir vazifani bajarganingizda, foyda olasiz.</p>
+    <p>3. Foyda yechib olish uchun kiritilgan hisob raqami ishlatiladi.</p>
 
+    <h3>Vazifalar</h3>
+    <p>Vazifa bajarish uchun <a href="task.html">bu yerga bosing</a>.</p>
+    <h3>Depozit kiritish</h3>
+    <p>Depozit kiritish uchun <a href="deposit.html">bu yerga bosing</a>.</p>
+    <h3>Pul olish</h3>
+    <p>Pul olish uchun <a href="withdraw.html">bu yerga bosing</a>.</p>
+    
     <script>
-        // Loginni tekshirish va saqlash
-        const loginForm = document.getElementById('loginForm');
-        const userDashboard = document.getElementById('userDashboard');
-        const userLoginSpan = document.getElementById('userLogin');
-
-        loginForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const login = document.getElementById('login').value;
-
-            // Faqat +998 bilan boshlanadigan loginni qabul qilamiz
-            if (!login.startsWith('+998') || login.length < 13) {
-                alert('Login +998 bilan boshlanadigan telefon raqami bo\'lishi kerak!');
-                return;
-            }
-
-            // Loginni saqlash va dashboardga o'tish
-            localStorage.setItem('userLogin', login);
-            showDashboard();
-        });
-
-        function showDashboard() {
-            const storedLogin = localStorage.getItem('userLogin');
-            if (storedLogin) {
-                userLoginSpan.textContent = storedLogin;
-                loginForm.style.display = 'none';
-                userDashboard.style.display = 'block';
-            }
-        }
-
-        // Logout funksiyasi
-        function logout() {
-            localStorage.removeItem('userLogin');
-            loginForm.style.display = 'block';
-            userDashboard.style.display = 'none';
-        }
-
-        // Sahifa yuklanishi bilan foydalanuvchi loginini tekshirish
-        window.onload = function() {
-            showDashboard();
-        };
+        // Foydalanuvchi logini ko'rsatish
+        document.getElementById('loginDisplay').innerText = localStorage.getItem('userLogin') || 'Logindan o'ting';
     </script>
 </body>
 </html>
