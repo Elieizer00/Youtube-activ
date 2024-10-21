@@ -1,76 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bosh Sahifa</title>
-</head>
-<body>
-    <h1>Youtube Active</h1>
-    <h2>Foydalanuvchi kabineti</h2>
-    <p id="userLogin">Sizning loginingiz: <strong id="loginDisplay"></strong></p>
-    
-    <h3>Depozit Jadvali</h3>
-    <table border="1">
-        <tr>
-            <th>Depozit Miqdori (UZS)</th>
-            <th>Daraaja</th>
-            <th>Vazifalar soni</th>
-            <th>Kunlik Foyda (UZS)</th>
-            <th>Yillik Foyda (UZS)</th>
-        </tr>
-        <tr>
-            <td>100,000</td>
-            <td>Daraaja 1</td>
-            <td>5</td>
-            <td>2,000</td>
-            <td>730,000</td>
-        </tr>
-        <tr>
-            <td>500,000</td>
-            <td>Daraaja 2</td>
-            <td>10</td>
-            <td>10,000</td>
-            <td>3,650,000</td>
-        </tr>
-        <tr>
-            <td>1,000,000</td>
-            <td>Daraaja 3</td>
-            <td>15</td>
-            <td>25,000</td>
-            <td>9,125,000</td>
-        </tr>
-        <tr>
-            <td>2,000,000</td>
-            <td>Daraaja 4</td>
-            <td>20</td>
-            <td>50,000</td>
-            <td>18,250,000</td>
-        </tr>
-        <tr>
-            <td>3,000,000</td>
-            <td>Daraaja 5</td>
-            <td>25</td>
-            <td>100,000</td>
-            <td>36,500,000</td>
-        </tr>
-    </table>
+<script>
+    function habarYuborish() {
+        const user = "foydalanuvchi_ismi";
+        const message = document.getElementById("messageInput").value;
 
-    <h3>Sayt Qoidalari</h3>
-    <p>1. Depozit kiritganingizda, siz malum darajaga ulanasiz.</p>
-    <p>2. Har bir vazifani bajarganingizda, foyda olasiz.</p>
-    <p>3. Foyda yechib olish uchun kiritilgan hisob raqami ishlatiladi.</p>
-
-    <h3>Vazifalar</h3>
-    <p>Vazifa bajarish uchun <a href="task.html">bu yerga bosing</a>.</p>
-    <h3>Depozit kiritish</h3>
-    <p>Depozit kiritish uchun <a href="deposit.html">bu yerga bosing</a>.</p>
-    <h3>Pul olish</h3>
-    <p>Pul olish uchun <a href="withdraw.html">bu yerga bosing</a>.</p>
-    
-    <script>
-        // Foydalanuvchi logini ko'rsatish
-        document.getElementById('loginDisplay').innerText = localStorage.getItem('userLogin') || 'Logindan o'ting';
-    </script>
-</body>
-</html>
+        fetch('http://http://92.63.204.119:5000/qabul', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user: user, message: message })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "tasdiqlandi") {
+                alert("Habar qabul qilindi va tasdiqlandi!");
+            } else {
+                alert("Habar yuborishda xato yuz berdi.");
+            }
+        })
+        .catch(error => console.error('Xatolik:', error));
+    }
+</script>
