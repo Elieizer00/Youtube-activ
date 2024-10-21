@@ -19,7 +19,7 @@ function isValidLogin(login) {
 }
 
 function loginUser(user) {
-    alert("Tizimga kirish muvaffaqiyatli!");
+    console.log("Tizimga kirish muvaffaqiyatli:", user);
     userSection.style.display = "block";
     loginSection.style.display = "none";
     userLoginDisplay.textContent = user.login;
@@ -29,6 +29,8 @@ function loginUser(user) {
 loginBtn.addEventListener("click", function() {
     const login = document.getElementById("login").value;
     const password = document.getElementById("password").value;
+
+    console.log("Login urinish:", login, password);
 
     // Login tekshiruvi
     if (!isValidLogin(login)) {
@@ -49,6 +51,8 @@ registerBtn.addEventListener("click", function() {
     const login = document.getElementById("login").value;
     const password = document.getElementById("password").value;
 
+    console.log("Ro'yxatdan o'tish urinish:", login, password);
+
     // Login tekshiruvi
     if (!isValidLogin(login)) {
         alert("Login +998 bilan boshlanishi kerak va 13 ta belgidan iborat bo'lishi zarur!");
@@ -67,6 +71,7 @@ registerBtn.addEventListener("click", function() {
 });
 
 logoutBtn.addEventListener("click", function() {
+    console.log("Chiqish qilindi");
     userSection.style.display = "none";
     loginSection.style.display = "block";
     localStorage.removeItem("currentUser");
